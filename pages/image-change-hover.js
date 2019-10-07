@@ -1,7 +1,7 @@
 import React from "react";
 import ImageToggleOnMouseover from "../src/components/ImageToggleOnMouseover";
 
-const ImageChange = () => {
+const ImageChangeHover = () => {
   return (
     <div>
       <ImageToggleOnMouseover
@@ -20,4 +20,4 @@ const ImageChange = () => {
   );
 };
 
-export default ImageChange;
+export default ImageChangeHover;
