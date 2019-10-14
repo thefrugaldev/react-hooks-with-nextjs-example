@@ -36,3 +36,5 @@ const whiskeyData = [
     detail: `A great whiskey from beginning to end. Soothing layers of sweetness are balanced by candied fruit and waves of spice. The palate is clean, the flavors are deep, the spices are well-defined, and there's not one hint of excessive tired oak.`
   }
 ];
+
+export default whiskeyData;
