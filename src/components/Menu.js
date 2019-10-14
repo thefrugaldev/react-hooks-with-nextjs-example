@@ -13,8 +13,8 @@ export class Menu extends Component {
               </Link>
             </li>
             <li>
-              <Link href="/bourbons">
-                <a className="nav-link">Bourbons</a>
+              <Link href="/whiskeys">
+                <a className="nav-link">Whiskeys</a>
               </Link>
             </li>
           </ul>

@@ -1,10 +1,10 @@
 import React from "react";
 import Home from "./Home";
-import Bourbons from "./Bourbons";
+import Whiskeys from "./Whiskeys";
 
 const pageToShow = pageName => {
   if (pageName === "Home") return <Home />;
-  if (pageName === "Bourbons") return <Bourbons />;
+  if (pageName === "Whiskeys") return <Whiskeys />;
   return <div>Not Found :(</div>;
 };
 

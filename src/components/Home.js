@@ -1,6 +1,6 @@
 import React from "react";
-import "bootstrap/dist/css/boostrap.min.css";
-import "../static/site.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../../static/site.css";
 import { Header } from "./Header";
 import { Menu } from "./Menu";
 

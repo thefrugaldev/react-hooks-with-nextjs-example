@@ -1,7 +1,6 @@
 import React from "react";
-import App from "../src/App";
+import App from "../src/components/App";
 
-//todo: yarn add bootstrap react-toastify @zeit/next-css
 //todo: add icons for favoriting bourbon images (bw & color)
 
 function index() {
