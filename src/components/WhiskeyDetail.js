@@ -1,13 +1,14 @@
-import ImageToggleOnScroll from "./ImageToggleOnScroll";
+import ImageToggleOnMouseover from "./ImageToggleOnMouseover";
 
 const WhiskeyDetail = React.memo(
   ({ id, name, proof, favorite, detail, onFavoriteHandler }) => {
     return (
       <div className="card col-4 cardmin">
-        <ImageToggleOnScroll
+        <ImageToggleOnMouseover
           className="card-img-top"
           primaryImg={`/static/whiskeys/${id}-bw.jpg`}
           secondaryImg={`/static/whiskeys/${id}.jpg`}
+          height={500}
           alt={`${name}`}
         />
         <div className="card-body">

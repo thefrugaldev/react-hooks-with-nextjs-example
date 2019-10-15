@@ -23,6 +23,7 @@ const Whiskeys = ({}) => {
     }).then(() => {
       setIsLoading(false);
       const whiskeyListServerFilter = WhiskeyData.filter(({ bourbon, rye }) => {
+        console.log(bourbon);
         return (isBourbon && bourbon) || (isRye && rye);
       });
       setWhiskeyList(whiskeyListServerFilter);
@@ -35,9 +36,7 @@ const Whiskeys = ({}) => {
   const whiskeyListFiltered = isLoading
     ? []
     : whiskeyList
-        .filter(
-          ({ isBourbon, isRye }) => (isBourbon && bourbon) || (isRye && rye)
-        )
+        .filter(({ bourbon, rye }) => (isBourbon && bourbon) || (isRye && rye))
         .sort(function(a, b) {
           if (a.name < b.name) {
             return -1;
@@ -115,7 +114,7 @@ const Whiskeys = ({}) => {
                     proof={proof}
                     favorite={favorite}
                     detail={detail}
-                    favoriteHandler={favoriteHandler}
+                    onFavoriteHandler={favoriteHandler}
                   />
                 );
               }
