@@ -5,7 +5,8 @@ const ImageToggleOnMouseover = ({
   secondaryImg,
   height,
   width,
-  alt
+  alt,
+  className
 }) => {
   const imageRef = useRef(null);
 
@@ -17,6 +18,7 @@ const ImageToggleOnMouseover = ({
       onMouseOut={() => {
         imageRef.current.src = primaryImg;
       }}
+      className={className}
       src={primaryImg}
       height={height}
       width={width}

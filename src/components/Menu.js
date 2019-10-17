@@ -1,10 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import Link from "next/link";
+import SignMeUp from "./SignMeUp";
 
-export class Menu extends Component {
-  render() {
-    return (
-      <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+export const Menu = () => {
+  const signUpCallback = email => {
+    return console.log(`sign up called with email ${email}`);
+  };
+
+  return (
+    <nav className="navbar navbar-expand-lg bg-dark navbar-dark mb-lg-4">
+      <div className="container">
         <div className="navbar">
           <ul className="navbar-nav">
             <li className="nav-item">
@@ -19,7 +24,8 @@ export class Menu extends Component {
             </li>
           </ul>
         </div>
-      </nav>
-    );
-  }
-}
+        <SignMeUp signUpCallback={signUpCallback} />
+      </div>
+    </nav>
+  );
+};

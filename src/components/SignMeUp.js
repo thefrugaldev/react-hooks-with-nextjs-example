@@ -40,32 +40,31 @@ const SignMeUp = ({ signupCallback }) => {
   const buttonText = sendProcessing ? "processing..." : "Get Updates";
 
   return (
-    <div className="container">
-      <div>
-        <ToastContainer />
-        <div className="content">
-          <input
-            value={email}
-            onChange={e => {
-              setEmailValid(validateEmail(e.target.value));
-              return setEmail(e.target.value);
-            }}
-            placeholder="Enter Email"
-            type="email"
-            name="email"
-            required
-          />
-          <button
-            disabled={!emailValid || sendProcessing}
-            className="btn"
-            onClick={sendEmailToBackend}
-            type="submit"
-          >
-            {buttonText}
-          </button>
-        </div>
+    <>
+      <ToastContainer />
+      <div className="content form-inline float-right">
+        <input
+          value={email}
+          onChange={e => {
+            setEmailValid(validateEmail(e.target.value));
+            return setEmail(e.target.value);
+          }}
+          placeholder="Enter Email"
+          type="email"
+          name="email"
+          required
+          className="form-control mx-sm-2"
+        />
+        <button
+          disabled={!emailValid || sendProcessing}
+          className="btn btn-primary"
+          onClick={sendEmailToBackend}
+          type="submit"
+        >
+          {buttonText}
+        </button>
       </div>
-    </div>
+    </>
   );
 };
 

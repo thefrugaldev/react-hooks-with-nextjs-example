@@ -23,7 +23,6 @@ const Whiskeys = ({}) => {
     }).then(() => {
       setIsLoading(false);
       const whiskeyListServerFilter = WhiskeyData.filter(({ bourbon, rye }) => {
-        console.log(bourbon);
         return (isBourbon && bourbon) || (isRye && rye);
       });
       setWhiskeyList(whiskeyListServerFilter);
@@ -72,33 +71,30 @@ const Whiskeys = ({}) => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div>
+    <>
       <Header />
       <Menu />
       <div className="container">
-        <div className="btn-toolbar margintopbottom5 checkbox-bigger">
+        <div className="btn-toolbar my-5">
           <div className="hide">
+            <h5>Filter by Type of Whiskey: </h5>
             <div className="form-check-inline">
-              <label className="form-check-label">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  onChange={handleChangeBourbon}
-                  checked={isBourbon}
-                />
-                Bourbons
-              </label>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                onChange={handleChangeBourbon}
+                checked={isBourbon}
+              />
+              <label className="form-check-label">Bourbons</label>
             </div>
             <div className="form-check-inline">
-              <label className="form-check-label">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  onChange={handleChangeRye}
-                  checked={isRye}
-                />
-                Ryes
-              </label>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                onChange={handleChangeRye}
+                checked={isRye}
+              />
+              <label className="form-check-label">Ryes</label>
             </div>
           </div>
         </div>
@@ -122,7 +118,7 @@ const Whiskeys = ({}) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
