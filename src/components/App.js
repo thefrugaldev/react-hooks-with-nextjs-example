@@ -11,7 +11,8 @@ const pageToShow = pageName => {
 };
 
 const configValue = {
-  showBourbonType: true
+  showSignMeUp: true,
+  showBourbonType: false
 };
 
 const App = ({ pageName }) => {

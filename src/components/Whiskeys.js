@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../../static/site.css";
+import React, { useState, useEffect, useContext, useReducer } from "react";
+//Components
 import { Header } from "./Header";
 import { Menu } from "./Menu";
 import WhiskeyData from "./WhiskeyData";
 import WhiskeyDetail from "./WhiskeyDetail";
+import { ConfigContext } from "./App";
+import whiskeysReducer from "../reducers/whiskeysReducer";
+//Styles
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../../static/site.css";
 
 const Whiskeys = ({}) => {
   const [isBourbon, setIsBourbon] = useState(true);
   const [isRye, setIsRye] = useState(true);
 
-  const [whiskeyList, setWhiskeyList] = useState([]);
+  const [whiskeyList, dispatch] = useReducer(whiskeysReducer, []);
   const [isLoading, setIsLoading] = useState(true);
+
+  const context = useContext(ConfigContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,7 +30,10 @@ const Whiskeys = ({}) => {
       const whiskeyListServerFilter = WhiskeyData.filter(({ bourbon, rye }) => {
         return (isBourbon && bourbon) || (isRye && rye);
       });
-      setWhiskeyList(whiskeyListServerFilter);
+      dispatch({
+        type: "setWhiskeyList",
+        data: whiskeyListServerFilter
+      });
     });
     return () => {
       console.log("cleanup");
@@ -57,15 +65,10 @@ const Whiskeys = ({}) => {
   const favoriteHandler = (e, favoriteValue) => {
     e.preventDefault();
     const sessionId = parseInt(e.target.attributes["data-session-id"].value);
-    setWhiskeyList(
-      whiskeyList.map(whiskey => {
-        if (whiskey.id === sessionId) {
-          whiskey.favorite = favoriteValue;
-          return whiskey;
-        }
-        return whiskey;
-      })
-    );
+    dispatch({
+      type: favoriteValue == true ? "favorite" : "unfavorite",
+      sessionId
+    });
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -76,27 +79,29 @@ const Whiskeys = ({}) => {
       <Menu />
       <div className="container">
         <div className="btn-toolbar my-5">
-          <div className="hide">
-            <h5>Filter by Type of Whiskey: </h5>
-            <div className="form-check-inline">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                onChange={handleChangeBourbon}
-                checked={isBourbon}
-              />
-              <label className="form-check-label">Bourbons</label>
+          {context.showBourbonType == false ? null : (
+            <div className="hide">
+              <h5>Filter by Type of Whiskey: </h5>
+              <div className="form-check-inline">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  onChange={handleChangeBourbon}
+                  checked={isBourbon}
+                />
+                <label className="form-check-label">Bourbons</label>
+              </div>
+              <div className="form-check-inline">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  onChange={handleChangeRye}
+                  checked={isRye}
+                />
+                <label className="form-check-label">Ryes</label>
+              </div>
             </div>
-            <div className="form-check-inline">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                onChange={handleChangeRye}
-                checked={isRye}
-              />
-              <label className="form-check-label">Ryes</label>
-            </div>
-          </div>
+          )}
         </div>
         <div className="row">
           <div className="card-deck">
