@@ -2,6 +2,9 @@ import ImageToggleOnMouseover from "./ImageToggleOnMouseover";
 
 const WhiskeyDetail = React.memo(
   ({ id, name, proof, favorite, detail, onFavoriteHandler }) => {
+    //Proof that memoizing this component doesnt rerender all components on Whiskeys component
+    console.log(`Whiskey details: ${id} ${name} ${proof} ${favorite}`);
+
     return (
       <div className="card">
         <ImageToggleOnMouseover

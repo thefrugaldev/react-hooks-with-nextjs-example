@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useContext, useReducer } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useReducer,
+  useCallback,
+  useMemo
+} from "react";
 //Components
 import { Header } from "./Header";
 import { Menu } from "./Menu";
@@ -40,9 +47,9 @@ const Whiskeys = ({}) => {
     };
   }, []);
 
-  const whiskeyListFiltered = isLoading
-    ? []
-    : whiskeyList
+  const newWhiskeyList = useMemo(
+    () =>
+      whiskeyList
         .filter(({ bourbon, rye }) => (isBourbon && bourbon) || (isRye && rye))
         .sort(function(a, b) {
           if (a.name < b.name) {
@@ -52,7 +59,13 @@ const Whiskeys = ({}) => {
             return 1;
           }
           return 0;
-        });
+        }),
+    [isBourbon, isRye, whiskeyList]
+    //If any of these values change, the memoized version is dumped
+    //and the list is filtered, sorted and re-rendered
+  );
+
+  const whiskeyListFiltered = isLoading ? [] : newWhiskeyList;
 
   const handleChangeBourbon = () => {
     setIsBourbon(!isBourbon);
@@ -62,14 +75,14 @@ const Whiskeys = ({}) => {
     setIsRye(!isRye);
   };
 
-  const favoriteHandler = (e, favoriteValue) => {
+  const favoriteHandler = useCallback((e, favoriteValue) => {
     e.preventDefault();
     const sessionId = parseInt(e.target.attributes["data-session-id"].value);
     dispatch({
       type: favoriteValue == true ? "favorite" : "unfavorite",
       sessionId
     });
-  };
+  }, []);
 
   if (isLoading) return <div>Loading...</div>;
 

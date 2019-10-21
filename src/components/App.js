@@ -12,7 +12,7 @@ const pageToShow = pageName => {
 
 const configValue = {
   showSignMeUp: true,
-  showBourbonType: false
+  showBourbonType: true
 };
 
 const App = ({ pageName }) => {
